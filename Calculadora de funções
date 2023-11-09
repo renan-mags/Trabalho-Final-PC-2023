@@ -1,0 +1,166 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <locale.h>
+int main() {
+    int opcao;
+        printf("Bem Vindo(a) a calculadora de funcoes.\n");
+    do {
+        /* Menu de op��es. Apresenta��o do programa e suas funcionalidades */
+        
+        printf("\nEscolha o metodo de operacao que pretende usar:\n");
+        printf(" '1' Teorema de Pitagoras.\n");
+        printf(" '2' Formula de Baskara.\n");
+        printf(" '3' Distancia entre dois pontos no plano e no espaco.\n");
+        printf(" '4' Calculo de funcoes estatisticas: desvio padrao, moda e mediana.\n");
+        printf(" '5' Sair do programa.\n");
+
+        /* Leitura da opera��o escolhida pelo usuário */
+        printf("\nDigite o numero da opcao desejada: ");
+        scanf("%d", &opcao);
+ 
+        if (opcao < 1 || opcao > 5) {
+            printf("Opcao invalida! Por favor, escolha uma opcao de 1 a 5.\n");
+            continue; // Volta ao in�cio do loop
+        }
+        system("cls"); // Limpa a tela a partir da esolha
+        
+        /* Uso do switch-case para a inicia��o dos c�lculos de cada uma das op��es. */
+        switch (opcao) {
+            case 1:
+                int opc_Pit;
+                double hip, cat1, cat2;
+
+                printf("Opcao 'Teorema de Pitagoras' escolhida\n");
+                printf("\nSelecione de acordo com sua necessidade:\n");
+                printf(" '1' Descobrir hipotenusa, tendo o comprimento dos catetos.\n");
+                printf(" '2' Encontrar o valor de um cateto atraves do comprimento da hipotenusa e outro cateto.\n");
+
+                printf("\nDigite o numero da opcao desejada: ");
+                scanf("%d", &opc_Pit);
+
+                if (opc_Pit < 1 || opc_Pit > 2) {
+                    printf("Opcao invalida! Por favor, escolha 1 ou 2.\n");
+                    continue; // Volta ao in�cio do loop
+                }
+    			system("cls");
+                switch (opc_Pit) {
+                    case 1:
+                        printf("Digite o valor do cateto1:\n");
+                        scanf("%lf", &cat1);
+                        printf("Digite o valor do cateto2:\n");
+                        scanf("%lf", &cat2);
+
+                        hip = sqrt(pow(cat1 ,2) + pow(cat2, 2)); //fun�ao sqrt faz a raiz quadrada e a pow elevar as variavel por 2
+
+                        printf("O comprimento da hipotenusa eh: %2.lf\n", hip);
+                        break;
+
+                    case 2:
+                        printf("Digite o valor do cateto:\n");
+                        scanf("%lf", &cat1);
+                        printf("Digite o valor da hipotenusa:\n");
+                        scanf("%lf", &hip);
+
+                        cat2 = sqrt(pow(hip ,2) - pow(cat1, 2));
+
+                        printf("O comprimento do cateto eh: %2.lf\n", cat2);
+                        break;
+
+                    default:
+                        printf("Opcao invalida!\n");
+                        continue; // Volta ao inicio do loop
+                }
+                break;
+
+            case 2:
+                double a, b, c;
+                double delta, x1, x2;
+
+                printf("Opcao 'Formula de Baskara' escolhida\n");
+                printf("\nExemplo de equa�ao do segundo grau: (a)2x� + (b)3x + (c)5 = 0\n");
+
+                printf("Digite o valor do coeficiente (a): ");
+                scanf("%lf", &a);
+                printf("Digite o valor do coeficiente (b): ");
+                scanf("%lf", &b);
+                printf("Digite o valor do coeficiente (c): ");
+                scanf("%lf", &c);
+
+                // Calculo do delta
+                delta = pow(b , 2)- 4 * a * c;
+
+                /* Verificando se o resultado do valor de delta vai ser maior, igual ou menor que zero, para determinar a quantidade de ra�zes */
+                if (delta > 0) {
+                    x1 = (-b + sqrt(delta)) / (2 * a);
+                    x2 = (-b - sqrt(delta)) / (2 * a);
+
+                    printf("As ra�zes s�o x1 = %lf e x2 = %lf\n", x1, x2);
+                } else if (delta == 0) {
+                    x1 = -b / (2 * a);
+                    printf("A funcao tem apenas uma raiz.\n");
+                    printf("A �nica raiz � x1 = %lf\n", x1);
+                } else {
+                    printf("A func�o nao tem raizes.\n");
+                }
+                break;
+
+            case 3:
+              int opc_Dab;
+              double xa,xb,ya,yb,za,zb,dab;
+                printf("Opcao 'Distancia entre dois pontos' escolhida.\n");
+                printf("\nSelecione de acordo com sua necessidade:\n");
+                printf(" '1', Coondenadas no eixo X.\n");
+                printf(" '2', Coondenadas no eixo X e Y.\n");
+    			printf(" '3', Coondenadas no eixo X, Y, Z.\n");
+                printf("\nDigite o numero da opcao desejada: ");
+                scanf("%d", &opc_Dab);
+                
+                if (opc_Dab < 1 || opc_Dab > 3) {
+                    printf("Opcao invalida! Por favor, escolha 1 ou 3.\n");
+				}
+                system("cls");
+                
+                switch (opc_Dab) {
+                    case 1:
+                        printf("Digite o valor de xa:\n");
+                        scanf("%lf", &xa);
+                        printf("Digite o valor de xb:\n");
+                        scanf("%lf", &xb);
+
+                        dab = xb - xa; //a distancia de dois pontos que entao apenas no eixo X
+
+                        printf("A distancia eh: %2.lf\n", dab);
+                        break;
+
+                    case 2:
+                        printf("Digite o valor de xa e ya:\n");
+                        scanf("%lf %lf", &xa , &ya);
+                        printf("Digite o valor de xb e yb:\n");
+                        scanf("%lf %lf", &xb,&yb);
+
+                        dab = sqrt(pow(xb - xa, 2) + pow(yb - ya ,2)); //a distancia de dois pontos que entao no eixo X e Y
+
+                        printf("A distancia eh: %2.lf\n", dab);
+                        break;
+                    case 3:
+                        printf("Digite o valor de xa, ya, za:\n");
+                        scanf("%lf %lf %lf", &xa , &ya,&za);
+                        printf("Digite o valor de xb, yb, zb:\n");
+                        scanf("%lf %lf %lf", &xb ,&yb ,&zb);
+
+                        dab = sqrt(pow(xb - xa, 2) + pow(yb - ya ,2) + pow(zb - za , 2)); //a distancia de dois pontos que entao no eixo X , Y e Z
+
+                        printf("A distancia eh: %2.lf\n", dab);
+                        break;
+                
+				default:
+                printf("Opcao invalida!\n");
+            }
+                continue; // Volta ao in�cio do loop
+                break;
+        }
+
+    } while (opcao != 5);
+
+    return 0;
